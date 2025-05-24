@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+ENV/
+venv/
+
+# pytest cache
+.pytest_cache/
+
+# test output
+coverage.*
+*.cover
+*.log
+htmlcov/
+
+# mypy, Pyright, pytype, etc
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# editor / system stuff
+.DS_Store
+.idea/
+.vscode/
+
+# compiled C extensions
+*.so
+
+# ignore Black backup files (very rare)
+*.bak
+
+# local project environment overrides
+.env
