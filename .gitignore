@@ -36,3 +36,6 @@ htmlcov/
 
 # local project environment overrides
 .env
+
+# practice mode backups
+.practice_backup/

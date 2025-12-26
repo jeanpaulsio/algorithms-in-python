@@ -20,6 +20,29 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Practice Mode
+
+Hide solutions and practice implementing algorithms yourself:
+
+```bash
+# Enter practice mode (hides solutions, creates stubs)
+make practice
+# or: python scripts/practice_mode.py on
+
+# Implement your solution, then run tests
+pytest
+
+# When done, restore solutions
+make restore
+# or: python scripts/practice_mode.py off
+```
+
+Practice mode will:
+- Backup your current solutions
+- Replace them with function stubs (signatures only)
+- Hide private helper functions (they give hints away)
+- Restore everything when you're done
+
 ## Running Tests
 
 ```bash
