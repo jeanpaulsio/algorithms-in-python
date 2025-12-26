@@ -1,16 +1,8 @@
-def find_last_number(arr):
-    for i, val in enumerate(arr):
-        if val == -1:
-            return i - 1
-
-    return len(arr) - 1
-
-
 def clone_even_numbers(arr):
     if not arr:
         return arr
 
-    i = find_last_number(arr)
+    i = _find_last_number(arr)
     j = len(arr) - 1
 
     while i >= 0:
@@ -22,3 +14,10 @@ def clone_even_numbers(arr):
         i -= 1
 
     return arr
+
+def _find_last_number(arr):
+    for i, val in enumerate(arr):
+        if val == -1:
+            return i - 1
+
+    return len(arr) - 1
