@@ -30,7 +30,7 @@ pytest
 pytest -k even
 
 # Run a specific test
-pytest arrays_and_strings/test_clone_even_numbers.py
+pytest tests/arrays_and_strings/test_clone_even_numbers.py
 ```
 
 ## Linting & Formatting
@@ -45,4 +45,4 @@ black .
 
 ## Directory
 
-1. [arrays_and_strings](./arrays_and_strings/)
+1. [arrays_and_strings](./src/algorithms/arrays_and_strings/)
