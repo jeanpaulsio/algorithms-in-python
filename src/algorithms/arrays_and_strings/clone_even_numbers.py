@@ -26,6 +26,7 @@ def clone_even_numbers(arr):
 
     return arr
 
+
 def _find_last_number(arr):
     for i, val in enumerate(arr):
         if val == -1:
