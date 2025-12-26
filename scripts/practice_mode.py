@@ -1,10 +1,13 @@
 import shutil
 import sys
 import ast
+import os
 from pathlib import Path
 
 SRC_DIR = Path("src/algorithms")
 BACKUP_DIR = Path(".practice_backup")
+GIT_HOOKS_DIR = Path(".git/hooks")
+PRE_COMMIT_HOOK = GIT_HOOKS_DIR / "pre-commit"
 
 
 def create_stub_from_file(filepath):
@@ -57,6 +60,90 @@ def create_stub_from_file(filepath):
     return "\n".join(stubs) if stubs else "# TODO: Implement\n    pass\n"
 
 
+def install_git_hook():
+    """Install a pre-commit hook to prevent commits during practice mode"""
+    if not GIT_HOOKS_DIR.exists():
+        return  # Not a git repo or .git doesn't exist
+
+    hook_start_marker = "# BEGIN Practice mode protection"
+    hook_end_marker = "# END Practice mode protection"
+    hook_content = f"""{hook_start_marker}
+if [ -d ".practice_backup" ]; then
+    echo "❌ Cannot commit while practice mode is enabled!"
+    echo "   Run 'python scripts/practice_mode.py off' to disable practice mode first."
+    exit 1
+fi
+{hook_end_marker}
+"""
+    GIT_HOOKS_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Check if hook already exists
+    if PRE_COMMIT_HOOK.exists():
+        existing_content = PRE_COMMIT_HOOK.read_text()
+        # If our marker is already there, remove old section first
+        if hook_start_marker in existing_content:
+            lines = existing_content.split("\n")
+            new_lines = []
+            skip_section = False
+            for line in lines:
+                if hook_start_marker in line:
+                    skip_section = True
+                    continue
+                if hook_end_marker in line:
+                    skip_section = False
+                    continue
+                if not skip_section:
+                    new_lines.append(line)
+            content = "\n".join(new_lines).rstrip() + "\n\n" + hook_content
+        else:
+            # Append our check to existing hook
+            content = existing_content.rstrip() + "\n\n" + hook_content
+    else:
+        # Create new hook with shebang
+        content = "#!/bin/sh\n\n" + hook_content
+
+    with open(PRE_COMMIT_HOOK, "w") as f:
+        f.write(content)
+    os.chmod(PRE_COMMIT_HOOK, 0o755)
+
+
+def remove_git_hook():
+    """Remove the practice mode pre-commit hook section"""
+    if not PRE_COMMIT_HOOK.exists():
+        return
+
+    hook_start_marker = "# BEGIN Practice mode protection"
+    hook_end_marker = "# END Practice mode protection"
+
+    content = PRE_COMMIT_HOOK.read_text()
+    if hook_start_marker not in content:
+        return  # Our hook section not present
+
+    lines = content.split("\n")
+    new_lines = []
+    skip_section = False
+    for line in lines:
+        if hook_start_marker in line:
+            skip_section = True
+            continue
+        if hook_end_marker in line:
+            skip_section = False
+            continue
+        if not skip_section:
+            new_lines.append(line)
+
+    # Remove trailing empty lines
+    while new_lines and not new_lines[-1].strip():
+        new_lines.pop()
+
+    if new_lines:
+        # Write back the hook without our section
+        PRE_COMMIT_HOOK.write_text("\n".join(new_lines) + "\n")
+    else:
+        # Hook is empty, remove it
+        PRE_COMMIT_HOOK.unlink()
+
+
 def enable_practice_mode():
     """Backup current solutions and replace with stubs"""
     if BACKUP_DIR.exists():
@@ -84,6 +171,8 @@ def enable_practice_mode():
 
         backed_up += 1
 
+    install_git_hook()
+
     print(f"✅ Practice mode enabled! {backed_up} solution(s) backed up and stubbed.")
     print("   Implement your solutions and run: pytest")
 
@@ -105,6 +194,7 @@ def disable_practice_mode():
 
     # Clean up
     shutil.rmtree(BACKUP_DIR)
+    remove_git_hook()
     print(f"✅ Practice mode disabled! {restored} solution(s) restored.")
 
 
