@@ -39,3 +39,6 @@ htmlcov/
 
 # practice mode backups
 .practice_backup/
+
+# ruff cache
+.ruff_cache/
