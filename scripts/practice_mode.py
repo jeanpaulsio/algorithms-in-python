@@ -1,4 +1,3 @@
-import os
 import shutil
 import sys
 import ast
@@ -13,28 +12,25 @@ def create_stub_from_file(filepath):
     with open(filepath, "r") as f:
         content = f.read()
 
-    try:
-        tree = ast.parse(content)
-        functions = []
+    tree = ast.parse(content)
+    functions = []
 
-        # Walk the tree and collect functions in order
-        for node in ast.walk(tree):
-            if isinstance(node, ast.FunctionDef):
-                # Skip private helper functions (they give hints away)
-                if node.name.startswith("_"):
-                    continue
+    # Walk the tree and collect functions in order
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef):
+            # Skip private helper functions (they give hints away)
+            if node.name.startswith("_"):
+                continue
 
-                args = [arg.arg for arg in node.args.args]
-                sig = f"def {node.name}({', '.join(args)}):"
-                functions.append((node.lineno, sig))
+            args = [arg.arg for arg in node.args.args]
+            sig = f"def {node.name}({', '.join(args)}):"
+            functions.append((node.lineno, sig))
 
-        # Sort by line number to preserve order
-        functions.sort(key=lambda x: x[0])
+    # Sort by line number to preserve order
+    functions.sort(key=lambda x: x[0])
 
-        stubs = [f"{sig}\n    pass\n" for _, sig in functions]
-        return "\n".join(stubs) if stubs else "# TODO: Implement\n    pass\n"
-    except Exception as e:
-        return f"# TODO: Implement\n    pass\n"
+    stubs = [f"{sig}\n    pass\n" for _, sig in functions]
+    return "\n".join(stubs) if stubs else "# TODO: Implement\n    pass\n"
 
 
 def enable_practice_mode():
