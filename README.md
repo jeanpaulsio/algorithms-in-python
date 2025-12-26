@@ -36,11 +36,14 @@ pytest tests/arrays_and_strings/test_clone_even_numbers.py
 ## Linting & Formatting
 
 ```bash
-# Lint the codebase
-flake8 .
+ruff check .
+ruff format .
+```
 
-# Format all files with black
-black .
+## Typechecking
+
+```bash
+pyright
 ```
 
 ## Directory
