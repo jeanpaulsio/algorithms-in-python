@@ -24,12 +24,36 @@ def create_stub_from_file(filepath):
 
             args = [arg.arg for arg in node.args.args]
             sig = f"def {node.name}({', '.join(args)}):"
-            functions.append((node.lineno, sig))
+
+            # Extract docstring if present
+            docstring = ast.get_docstring(node)
+
+            functions.append((node.lineno, sig, docstring))
 
     # Sort by line number to preserve order
     functions.sort(key=lambda x: x[0])
 
-    stubs = [f"{sig}\n    pass\n" for _, sig in functions]
+    stubs = []
+    for _, sig, docstring in functions:
+        stub = f"{sig}\n"
+        if docstring:
+            # Format docstring with proper indentation (ast.get_docstring already dedents)
+            lines = docstring.split("\n")
+            if len(lines) == 1:
+                # Single line docstring
+                stub += f'    """{lines[0]}"""\n'
+            else:
+                # Multi-line docstring - add 4 spaces indentation to each line
+                stub += '    """\n'
+                for line in lines:
+                    if line:  # Non-empty line
+                        stub += f"    {line}\n"
+                    else:  # Empty line - no trailing spaces
+                        stub += "\n"
+                stub += '    """\n'
+        stub += "    pass\n"
+        stubs.append(stub)
+
     return "\n".join(stubs) if stubs else "# TODO: Implement\n    pass\n"
 
 
