@@ -1,3 +1,19 @@
-[tool.black]
+[tool.ruff]
 line-length = 120
-target-version = ['py313']
+exclude = [".venv", "__pycache__"]
+
+[tool.ruff.lint]
+ignore = ["E203", "E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pyright]
+include = ["src"]
+exclude = ["test", ".venv", "__pycache__"]
+pythonVersion = "3.13"
+typeCheckingMode = "basic"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

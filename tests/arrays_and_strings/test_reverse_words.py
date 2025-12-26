@@ -1,4 +1,4 @@
-from arrays_and_strings.reverse_words import reverse_words
+from algorithms.arrays_and_strings.reverse_words import reverse_words
 
 
 def test_empty_string():
