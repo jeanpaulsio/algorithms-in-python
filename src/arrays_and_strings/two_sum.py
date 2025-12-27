@@ -1,3 +1,6 @@
+# See ../../docs/arrays_and_strings/two_sum.md
+
+
 def two_sum(nums: list[int], target: int) -> tuple[int, int] | None:
     """
     Return indices of two elements whose values sum to the target.
