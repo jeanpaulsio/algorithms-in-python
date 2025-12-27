@@ -2,6 +2,8 @@
 
 Given an array, reverse the order of its elements in place.
 
+[See solution](../../src/arrays_and_strings/reverse.py)
+
 ## Approach
 
 Use two pointers starting at opposite ends of the array. Swap elements at these positions and move the pointer towards the center until they meet.

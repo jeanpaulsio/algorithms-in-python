@@ -1,5 +1,7 @@
 from typing import Any
 
+# See ../../docs/arrays_and_strings/reverse.md
+
 
 def reverse(items: list[Any]) -> list[Any]:
     """
