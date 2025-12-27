@@ -17,6 +17,10 @@ positions and move the pointer towards the center until they meet.
 are in their final positions.
 - When `i` is greater or equal to `j`, that means that all elements have been swapped.
 
+## Edge Cases
+
+- Empty array
+- Single element
 
 ## Time Complexity
 

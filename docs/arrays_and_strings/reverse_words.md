@@ -28,6 +28,14 @@ been added to the result in reverse order.
 a leading space to trigger extraction.
 
 
+## Edge Cases
+
+- Empty string
+- Single letter
+- Single space
+- Begins with space
+- Ends with space
+
 ## Time Complexity
 
 - O(n) where n is the length of the string.

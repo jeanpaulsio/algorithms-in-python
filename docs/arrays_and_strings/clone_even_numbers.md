@@ -27,6 +27,14 @@ placed.
 - Pointer `i` tracks the current element being processed while pointer `j` tracks
 where to write the next element(s).
 
+## Edge Cases
+
+- Empty array
+- All elements are -1
+- All odd numbers
+- All even numbers
+- Single element whether +ve or -ve
+
 ## Time Complexity
 
 - O(n) where n is the length of the array.
