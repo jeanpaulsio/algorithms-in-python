@@ -4,7 +4,7 @@ import ast
 import os
 from pathlib import Path
 
-SRC_DIR = Path("src/algorithms")
+SRC_DIR = Path("src")
 BACKUP_DIR = Path(".practice_backup")
 GIT_HOOKS_DIR = Path(".git/hooks")
 PRE_COMMIT_HOOK = GIT_HOOKS_DIR / "pre-commit"

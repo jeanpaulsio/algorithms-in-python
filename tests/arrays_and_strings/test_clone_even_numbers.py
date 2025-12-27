@@ -1,4 +1,4 @@
-from algorithms.arrays_and_strings.clone_even_numbers import clone_even_numbers
+from arrays_and_strings.clone_even_numbers import clone_even_numbers
 
 
 def test_empty_array():

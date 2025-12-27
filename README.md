@@ -71,4 +71,4 @@ pyright
 
 ## Directory
 
-1. [arrays_and_strings](./src/algorithms/arrays_and_strings/)
+1. [arrays_and_strings](./src/arrays_and_strings/)
