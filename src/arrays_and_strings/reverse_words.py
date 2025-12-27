@@ -1,14 +1,16 @@
 # See ../../docs/arrays_and_strings/reverse_words.md
 
 
-def reverse_words(s):
+def reverse_words(s: str) -> str:
     """
     Reverse the order of words in a string.
 
-    Given a string, return a new string with the words in reverse order.
-    Words are separated by spaces. Leading and trailing spaces are ignored.
+    Problem:
+        Given a string, return a new string with the words in reverse order.
+        Words are separated by spaces. Leading and trailing spaces are ignored.
 
-    Level: Easy
+    Level:
+        Easy
 
     Examples:
         >>> reverse_words("foo bar")
@@ -35,7 +37,7 @@ def reverse_words(s):
         i -= 1
 
     last_word = s[i + 1 : j]
-    if last_word != " ":
+    if last_word:
         result += last_word
 
     return result

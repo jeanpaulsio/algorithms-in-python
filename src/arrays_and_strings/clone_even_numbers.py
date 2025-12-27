@@ -3,13 +3,15 @@
 
 def clone_even_numbers(numbers: list[int]) -> list[int]:
     """
-    Replaces each even number with two of the same number.
+    Duplicate each even number in the list in place.
 
-    Given an array of numbers, replace each even number with two of the same number.
-    Assume that the array has the exact number of space to accommodate the new numbers.
-    Empty slots are represented by -1.
+    Problem:
+        Given a list of numbers, replace each even number with two of the same number.
+        Assume that the list has the exact number of space to accommodate the new numbers.
+        Empty slots are represented by -1.
 
-    Level: Easy
+    Level:
+        Easy
 
     Examples:
         >>> clone_even_numbers([2, 4, 6, -1, -1, -1])

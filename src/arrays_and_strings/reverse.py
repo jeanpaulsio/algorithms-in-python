@@ -5,11 +5,14 @@ from typing import Any
 
 def reverse(items: list[Any]) -> list[Any]:
     """
-    Reverses the order of an array's elements.
+    Reverse a list in place and return it.
 
-    Given an array, reverse the order of its elements in place.
+    Problem:
+        Given a list, reverse the order of its elements in place
+        without using built-in reversal methods.
 
-    Level: Easy
+    Level:
+        Easy
 
     Examples:
         >>> reverse([1, 2, 3, 4])
