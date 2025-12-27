@@ -5,6 +5,8 @@ def reverse_words(s):
     Given a string, return a new string with the words in reverse order.
     Words are separated by spaces. Leading and trailing spaces are ignored.
 
+    Level: Easy
+
     Examples:
         >>> reverse_words("foo bar")
         'bar foo'

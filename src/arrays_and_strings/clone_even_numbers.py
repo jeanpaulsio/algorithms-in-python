@@ -6,6 +6,8 @@ def clone_even_numbers(arr):
     Assume that the array has the exact number of space to accommodate the new numbers.
     Empty slots are represented by -1.
 
+    Level: Easy
+
     Examples:
         >>> clone_even_numbers([2, 4, 6, -1, -1, -1])
         [2, 2, 4, 4, 6, 6]
