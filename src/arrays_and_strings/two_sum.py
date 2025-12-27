@@ -15,4 +15,17 @@ def two_sum(nums: list[int], target: int) -> tuple[int, int] | None:
         >>> two_sum(nums=[2, 7, 11, 15], target=9)
         (0, 1)
     """
-    pass
+    if len(nums) < 2:
+        return None
+
+    i, j = 0, len(nums) - 1
+    while i < j:
+        pair_sum = nums[i] + nums[j]
+        if pair_sum == target:
+            return i, j
+        elif pair_sum < target:
+            i += 1
+        elif pair_sum > target:
+            j -= 1
+
+    return None
